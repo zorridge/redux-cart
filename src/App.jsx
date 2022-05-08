@@ -8,6 +8,7 @@ import Cart from './components/Cart/Cart';
 import Layout from './components/Layout/Layout';
 import Products from './components/Shop/Products';
 
+// Prevent sendCartDataRequest() from triggering since fetchCartDataRequest() will update state.cart.items
 let firstMount = true;
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
     );
     const dispatch = useDispatch();
 
+    // Again, usage of async fn within useEffect()
     useEffect(() => {
         const fetchCartDataRequest = async () => {
             const response = await fetch(
@@ -41,6 +43,7 @@ function App() {
         });
     }, [dispatch]);
 
+    // Send PUT request to update Firebase when state.cart.items updates... Lazy override
     useEffect(() => {
         const sendCartDataRequest = async () => {
             if (firstMount || !isChanged) {

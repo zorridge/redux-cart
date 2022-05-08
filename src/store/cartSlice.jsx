@@ -1,5 +1,34 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+/**
+ * https://redux-toolkit.js.org/usage/usage-guide#simplifying-slices-with-createslice
+ * https://redux-toolkit.js.org/api/createAction
+ * https://redux-toolkit.js.org/api/createSlice#return-value
+ *
+ * createSlice() will auto-generate the action types and action creators, based on the names of the reducer functions provided
+ *
+ * Each function defined in the reducers argument will have a corresponding action creator generated using createAction()
+ * and included in the result's actions field using the same function name
+ *
+ * createSlice() looks at all of the functions that were defined in the reducers field,
+ * and for every "case reducer" function provided, generates an action creator that uses the name of the reducer as the action type itself
+ * i.e. increment reducer will become action type of 'counter/increment',
+ * and the increment() action creator from counterSlice.actions will return an action of that type that takes in a payload as argument
+ *
+ * Example of an action creator:
+ *
+ * const INCREMENT = 'counter/increment'
+ *
+ * function increment(amount) {
+ *   return {
+ *     type: INCREMENT,
+ *     payload: amount,
+ *   }
+ * }
+ *
+ * const action = increment(3) // output: { type: 'counter/increment', payload: 3 }
+ */
+
 const initialCartState = {
     isChanged: false,
     isShowCart: true,
